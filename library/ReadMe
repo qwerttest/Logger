@@ -1,0 +1,18 @@
+此模块是在开源框架https://github.com/orhanobut/logger 2.1.1版本上进行的二次开发；
+所有在原有框架中进行的修改都标有//TODO
+
+Logger初始化：
+1.AndroidLogAdapter用作在logcat中的日志显示，isLoggable表示是否打印，可以根据应用是否debug模块来设置
+    Logger.addLogAdapter(new AndroidLogAdapter(){
+            @Override
+            public boolean isLoggable(int priority, String tag) {
+                return true;
+        }
+        });
+2.Xiu8DiskLogAdapter用作日志存储，可以设置单文件大小、存储空间最大存储大小、存储路径，其他暂不支持自定义
+    Logger.addLogAdapter(new Xiu8DiskLogAdapter.Builder().diskMaxSpace(10*1024).fileMaxLength(5*1024).diskPath(getApplication().getExternalCacheDir().getAbsolutePath()).build());
+3.项目中使用：*注意：Logger引用为com.xiu8.logger.library.Logger;
+   不添加tag：Logger.d(msg);
+   自定义tag：Logger.t(tag).d(msg);
+
+
